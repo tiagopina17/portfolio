@@ -1,6 +1,4 @@
-/* General Styles */
-
- 
+ /* General Styles */
         :root {
             --primary-color: #3498db;
             --dark-bg: #0a1622;
@@ -214,271 +212,243 @@
             transform: translateY(-5px);
         }
 
-/* Complete redesign - Card-based layout with flexible images */
+        /* Projects Section - Updated for centered last item */
+        .project-card {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(6, 14, 22, 0.8) 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
 
-.project-card {
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(6, 14, 22, 0.8) 100%);
-    border-radius: 15px;
-    overflow: hidden;
-    margin-bottom: 40px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(52, 152, 219, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(52, 152, 219, 0.3);
+        }
 
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(52, 152, 219, 0.3);
-}
+        /* Projects grid with centered last item */
+        .projects-grid {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr;
+            justify-items: center;
+        }
 
-/* Image gets full freedom at the top */
-.project-image-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.02);
-    cursor: pointer;
-}
+        /* For larger screens, use 2 columns with special handling for odd items */
+        @media (min-width: 1200px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                justify-items: stretch;
+            }
+            
+            .project-card {
+                margin-bottom: 0;
+            }
+            
+            /* Center the last item if it's alone in its row */
+            .project-card:nth-child(odd):last-child {
+                grid-column: 1 / -1;
+                max-width: 600px;
+                justify-self: center;
+            }
+        }
 
-.project-image {
-    width: 100%;
-    height: auto; /* Let image determine its own height */
-    max-height: 400px; /* Maximum height to prevent extremely tall images */
-    object-fit: contain; /* Show full image */
-    object-position: center;
-    transition: transform 0.3s ease;
-    display: block;
-}
+        .project-image-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+            cursor: pointer;
+        }
 
-.project-card:hover .project-image {
-    transform: scale(1.05);
-}
+        .project-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+            object-position: center;
+            transition: transform 0.3s ease;
+            display: block;
+        }
 
-/* Image overlay for hover effect */
-.image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 2;
-}
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
 
-.project-image-container:hover .image-overlay {
-    opacity: 1;
-}
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
 
-.overlay-text {
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    pointer-events: none;
-}
+        .project-image-container:hover .image-overlay {
+            opacity: 1;
+        }
 
-/* Modal styles for image viewer */
-.image-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-}
+        .overlay-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
 
-.image-modal.active {
-    display: flex;
-}
+        /* Modal styles for image viewer */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
 
-.modal-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .image-modal.active {
+            display: flex;
+        }
 
-.modal-image {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-    cursor: zoom-in;
-}
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.modal-image.zoomed {
-    transform: scale(2);
-    cursor: zoom-out;
-}
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
 
-.close-modal {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10000;
-    transition: color 0.3s ease;
-}
+        .modal-image.zoomed {
+            transform: scale(2);
+            cursor: zoom-out;
+        }
 
-.close-modal:hover {
-    color: var(--primary-color);
-}
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            transition: color 0.3s ease;
+        }
 
-.zoom-controls {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-    z-index: 10000;
-}
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
 
-.zoom-btn {
-    background-color: rgba(52, 152, 219, 0.8);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
+        .zoom-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10000;
+        }
 
-.zoom-btn:hover {
-    background-color: var(--primary-color);
-}
+        .zoom-btn {
+            background-color: rgba(52, 152, 219, 0.8);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
 
-/* Content section below image */
-.project-content {
-    padding: 30px;
-}
+        .zoom-btn:hover {
+            background-color: var(--primary-color);
+        }
 
-.project-title {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: var(--light-text);
-    font-weight: 700;
-}
+        .project-content {
+            padding: 30px;
+        }
 
-.project-tech {
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--light-text);
+            font-weight: 700;
+        }
 
-.project-tech span {
-    background-color: rgba(52, 152, 219, 0.1);
-    color: var(--primary-color);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border: 1px solid rgba(52, 152, 219, 0.3);
-}
+        .project-tech {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
 
-.project-description {
-    margin-bottom: 25px;
-    line-height: 1.7;
-    color: var(--gray-text);
-    font-size: 1rem;
-}
+        .project-tech span {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
 
-.project-buttons {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
+        .project-description {
+            margin-bottom: 25px;
+            line-height: 1.7;
+            color: var(--gray-text);
+            font-size: 1rem;
+        }
 
-.project-btn {
-    background-color: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    font-size: 0.9rem;
-    flex: 0 0 auto; /* Don't grow or shrink */
-}
+        .project-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
 
-.project-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
-    text-decoration: none;
-    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-}
+        .project-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+            flex: 0 0 auto;
+        }
 
-/* Alternative: Grid layout for better spacing */
-.projects-grid {
-    display: grid;
-    gap: 40px;
-    grid-template-columns: 1fr;
-}
+        .project-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
 
-/* For larger screens, you can use 2 columns if desired */
-@media (min-width: 1200px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .project-card {
-        margin-bottom: 0; /* Grid handles spacing */
-    }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .project-content {
-        padding: 25px;
-    }
-    
-    .project-title {
-        font-size: 1.5rem;
-    }
-    
-    .project-image {
-        max-height: 300px;
-    }
-    
-    .project-buttons {
-        justify-content: center;
-    }
-    
-    .close-modal {
-        font-size: 30px;
-        top: 10px;
-        right: 20px;
-    }
-    
-    .zoom-controls {
-        bottom: 10px;
-    }
-    
-    .modal-content {
-        max-width: 95%;
-        max-height: 85%;
-    }
-}
         /* Contact Section */
         .contact-form {
             background-color: rgba(10, 22, 34, 0.5);
@@ -530,7 +500,7 @@
             transform: translateY(-5px);
         }
 
-        /* Responsive */
+        /* Responsive adjustments */
         @media (max-width: 992px) {
             h1 {
                 font-size: 2.8rem;
@@ -568,7 +538,26 @@
                 text-align: center;
             }
             
-            .project-image-container {
-                height: 250px;
+            .project-image {
+                max-height: 300px;
+            }
+            
+            .project-buttons {
+                justify-content: center;
+            }
+            
+            .close-modal {
+                font-size: 30px;
+                top: 10px;
+                right: 20px;
+            }
+            
+            .zoom-controls {
+                bottom: 10px;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+                max-height: 85%;
             }
         }
